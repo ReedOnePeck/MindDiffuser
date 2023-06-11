@@ -54,7 +54,7 @@ group = [0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24
 
 
 def decoding_layer(layer_name,remain_rate,decoding_function,n):
-    model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码特征选取/{}/解码模型权重保存/{}_remain_{}/'.format(layer_name,decoding_function,remain_rate)
+    model_save_path = './图像重建/数据集/解码特征选取/{}/解码模型权重保存/{}_remain_{}/'.format(layer_name,decoding_function,remain_rate)
     if not os.path.exists(model_save_path):
         os.makedirs(model_save_path)
 
@@ -76,7 +76,7 @@ def decoding_layer(layer_name,remain_rate,decoding_function,n):
         '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj01/func1pt8mm/betas_fithrf_GLMdenoise_RR/val_stim_CLIP_zscore.npy')
 
     if layer_name != 'VisionTransformer-1':
-        mask = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码特征选取/{}/Folder_5_{}.npy'.format(layer_name,remain_rate))
+        mask = np.load('./图像重建/数据集/解码特征选取/{}/Folder_5_{}.npy'.format(layer_name,remain_rate))
         y_trn = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)[:,mask]
         y_val = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[:500, mask]
     else:
@@ -163,7 +163,7 @@ x_test = scaler.fit_transform(x_val)
 val_CLIP_feature_all_layer = fetch_CLIP_feature('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj01/func1pt8mm/betas_fithrf_GLMdenoise_RR/val_stim_CLIP_zscore.npy')
 
 def decoding_test_1layer(layer_name,remain_rate,decoding_function,n):
-    model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码特征选取/{}/解码模型权重保存/{}_remain_{}/'.format(layer_name,decoding_function,remain_rate)
+    model_save_path = './图像重建/数据集/解码特征选取/{}/解码模型权重保存/{}_remain_{}/'.format(layer_name,decoding_function,remain_rate)
 
     if decoding_function == 'fastl2':
         model_name = "fastl2_n_feat_{}.pickle".format(n)
@@ -174,7 +174,7 @@ def decoding_test_1layer(layer_name,remain_rate,decoding_function,n):
     f_save.close()
 
     if layer_name != 'VisionTransformer-1':
-        mask = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码特征选取/{}/Folder_5_{}.npy'.format(layer_name,remain_rate))
+        mask = np.load('./图像重建/数据集/解码特征选取/{}/Folder_5_{}.npy'.format(layer_name,remain_rate))
         y_test = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[500:, mask]
     else:
         y_test = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[500:, :]
