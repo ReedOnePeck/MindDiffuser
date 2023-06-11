@@ -38,6 +38,8 @@ First, set up the conda enviroment as follows:<br>
 
 # <p align="center">  Experiments  </p> 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/1686488621334.png)
+## <p> MindDiffuser </p>
+
 ## <p> Reproduce the results of "High-resolution image reconstruction with latent diffusion models from human brain activity"(CVPR2023)  </p>
 
 ## <p> Reproduce the results of "Reconstruction of Perceived Images from fMRI Patterns and Semantic Brain Exploration using Instance-Conditioned GANs" </p>
