@@ -10,3 +10,6 @@ This is the official code for the paper "MindDiffuser: Controlled Image Reconstr
 This code was developed and tested with:
 
 *  Python version 3.8.5
+*  PyTorch version 1.11.0
+*  A100 40G
+*  The conda environment defined in environment.yml
