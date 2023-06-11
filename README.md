@@ -18,5 +18,5 @@ This code was developed and tested with:
 First, set up the conda enviroment as follows:<br>
 
     conda env create -f environment.yml  # create conda env
-    conda activate MindDiffuser                # activate conda env
+    conda activate MindDiffuser          # activate conda env
 
