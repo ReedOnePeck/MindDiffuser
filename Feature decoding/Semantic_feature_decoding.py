@@ -65,16 +65,16 @@ def reverse_reshape(l , mean, std): #(8859,15*768)>>(8859,15,768);revers_z_score
     return b_after_reverse
 
 
-model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码到stable-diffusion的文本空间/降为15维/同时拟合/Lin/大于best的一半_random/'
+model_save_path = './图像重建/数据集/解码到stable-diffusion的文本空间/降为15维/同时拟合/Lin/大于best的一半_random/'
 if not os.path.exists(model_save_path):
     os.makedirs(model_save_path)
 
 #y
-a = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/trn_caps_LDM_feature.npy')
+a = np.load('./图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/trn_caps_LDM_feature.npy')
 all_data = np.array(torch.tensor(a).squeeze(1))
 _, mean, s = reshape_z(all_data)
-np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/LDM_15_average_mean.npy', mean)
-np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/LDM_15_average_std.npy', s)
+np.save('./图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/LDM_15_average_mean.npy', mean)
+np.save('./图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/LDM_15_average_std.npy', s)
 
 
 all_data = np.array(torch.tensor(a).squeeze(1))[:,1:,:] #(8859,14,768)
@@ -89,8 +89,8 @@ x = scaler.fit_transform(x)
 x_trn = x[:, :]
 x_val = x[8000:, :]
 
-mean = (np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/LDM_15_average_mean.npy')[768:]).reshape(1,-1)
-std = (np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/LDM_15_average_std.npy')[768:]).reshape(1,-1)
+mean = (np.load('./图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/LDM_15_average_mean.npy')[768:]).reshape(1,-1)
+std = (np.load('./图像重建/数据集/Stable-diffusion文本特征/对c的对比实验/sub1/大于best的一半_random/LDM_15_average_std.npy')[768:]).reshape(1,-1)
 
 print('')
 def training_decode_LDM_text_feature(n , save):
@@ -134,17 +134,17 @@ for n in voxels:
 def decode_LDM_text_feature(n,recons_img_idx):
     x_test = fetch_ROI_voxel(val_file_ex, ROIs)  # [recons_img_idx:recons_img_idx + 1, :]
     x_test = scaler.fit_transform(x_test)
-    mean = (np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/LDM_15_average_mean.npy')).reshape(1, -1)
-    std = (np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/LDM_15_average_std.npy'))  # .reshape(1,-1)
+    mean = (np.load('./图像重建/数据集/Stable-diffusion文本特征/LDM_15_average_mean.npy')).reshape(1, -1)
+    std = (np.load('./图像重建/数据集/Stable-diffusion文本特征/LDM_15_average_std.npy'))  # .reshape(1,-1)
     std[:768] = 0
     std = std.reshape(1, -1)
-    model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码到stable-diffusion的文本空间/降为15维/同时拟合/提取的average特征/'
+    model_save_path = './图像重建/数据集/解码到stable-diffusion的文本空间/降为15维/同时拟合/提取的average特征/'
     model_name = "fastl2_n_feat_{}.pickle".format(n)
     f_save = open(model_save_path + model_name, 'rb')
     model = pickle.load(f_save)
     f_save.close()
     pred = model.predict(x_test)[recons_img_idx:recons_img_idx + 1, :]
-    cls = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/LDM_10_cls.npy')
+    cls = np.load('./图像重建/数据集/Stable-diffusion文本特征/LDM_10_cls.npy')
 
     z = np.zeros((1,11520))
     z[:,:768] = cls
@@ -160,7 +160,7 @@ print('')
 """
 group = [0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28, 0.3, 0.32, 0.34,0.36, 0.38, 0.4, 0.42, 0.44, 0.46, 0.48, 0.5, 0.52, 0.54, 0.56, 0.58, 0.6, 0.62, 0.64, 0.66, 0.68, 0.7,0.72, 0.74, 0.76, 0.78, 0.8]
 cor = []
-y_test = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/val_caps_LDM_feature_len_15_average.npy')
+y_test = np.load('./图像重建/数据集/Stable-diffusion文本特征/val_caps_LDM_feature_len_15_average.npy')
 for i in tqdm(range(982)):
     y_pred = decode_LDM_text_feature(125,i)
     y_pred = _reshape(y_pred)
@@ -170,7 +170,7 @@ for i in tqdm(range(982)):
     cor.append(abs(cor_i))
 
 
-#np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码到stable-diffusion的文本空间/降为15维/同时拟合/提取的best特征/pccs_big2small.npy',np.argsort(-np.array(cor)))
+#np.save('./图像重建/数据集/解码到stable-diffusion的文本空间/降为15维/同时拟合/提取的best特征/pccs_big2small.npy',np.argsort(-np.array(cor)))
 plt.hist(cor, group, histtype='bar')
 plt.title('15*768一次性预测')
 plt.show()
