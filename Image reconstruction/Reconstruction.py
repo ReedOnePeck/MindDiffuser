@@ -80,7 +80,6 @@ model_CLIP = model_CLIP.to(device)
 
 def CLIP_of_generated(generated_frames, model=model_CLIP):
     class TensorDataset(Dataset):
-        # TensorDataset继承Dataset, 重载了__init__, __getitem__, __len__
         def __init__(self, data_tensor, image_transforms=None):
             self.data_tensor = data_tensor
             self.transforms = image_transforms
@@ -168,8 +167,8 @@ def load_model_from_config(config, ckpt, verbose=False):
 
 
 def get_model():
-    config = OmegaConf.load("/nfs/diskstation/DataStation/ChangdeDu/LYZ/stable-diffusion/configs/v1-inference.yaml")
-    model = load_model_from_config(config,"/nfs/diskstation/DataStation/ChangdeDu/LYZ/stable-diffusion/checkpoints/sd-v1-4.ckpt")
+    config = OmegaConf.load("./stable-diffusion/configs/v1-inference.yaml")
+    model = load_model_from_config(config,"./stable-diffusion/checkpoints/sd-v1-4.ckpt")
     return model
 
 model = get_model()
@@ -217,18 +216,18 @@ def reverse_reshape_z(d, mean, std):
         e.append(f)
     b_reverse = np.array(e)
     return b_reverse
-l = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/trn_stim_lattent_z.npy')
+l = np.load('./图像重建/数据集/Stable-diffusion隐空间特征/trn_stim_lattent_z.npy')
 y = reshape(l)
-#np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/mean_y.npy',np.mean(y,axis=0))
-#np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/std_y.npy',np.std(y,axis=0))
-mean_y = (np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/mean_y.npy')).reshape(1, -1)
-std_y = (np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/std_y.npy')).reshape(1, -1)
+#np.save('./图像重建/数据集/Stable-diffusion隐空间特征/mean_y.npy',np.mean(y,axis=0))
+#np.save('./图像重建/数据集/Stable-diffusion隐空间特征/std_y.npy',np.std(y,axis=0))
+mean_y = (np.load('./图像重建/数据集/Stable-diffusion隐空间特征/mean_y.npy')).reshape(1, -1)
+std_y = (np.load('./图像重建/数据集/Stable-diffusion隐空间特征/std_y.npy')).reshape(1, -1)
 
 
 def decode_LDM_latent_feature(recons_img_idx):
     #x_test = fetch_ROI_voxel(val_file_ex, ROIs)  # [recons_img_idx:recons_img_idx + 1, :]
     #x_test = scaler.fit_transform(x_test)
-    model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/'
+    model_save_path = './图像重建/数据集/Stable-diffusion隐空间特征/'
     model_name = "fastl2_n_feat_{}.pickle".format(4000)
     f_save = open(model_save_path + model_name, 'rb')
     model = pickle.load(f_save)
@@ -240,16 +239,16 @@ def decode_LDM_latent_feature(recons_img_idx):
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
 #对c的解码
 
-mean = (np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/LDM_15_best_mean.npy')).reshape(1, -1)
-std = (np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/LDM_15_best_std.npy')) # .reshape(1,-1)
+mean = (np.load('./图像重建/数据集/Stable-diffusion文本特征/LDM_15_best_mean.npy')).reshape(1, -1)
+std = (np.load('./图像重建/数据集/Stable-diffusion文本特征/LDM_15_best_std.npy')) # .reshape(1,-1)
 std[:768] = 0
 std = std.reshape(1, -1)
-model_save_path_txt = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码到stable-diffusion的文本空间/降为15维/同时拟合/提取的best特征/'
+model_save_path_txt = './图像重建/数据集/解码到stable-diffusion的文本空间/降为15维/同时拟合/提取的best特征/'
 model_name_txt = "fastl2_n_feat_{}.pickle".format(125)
 f_save_txt = open(model_save_path_txt + model_name_txt, 'rb')
 decode_model = pickle.load(f_save_txt)
 f_save_txt.close()
-cls = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/LDM_10_cls.npy')
+cls = np.load('./图像重建/数据集/Stable-diffusion文本特征/LDM_10_cls.npy')
 
 def _reshape(l):  #(8859,15,768)>>(8859,15*768)
 	b = []
@@ -279,7 +278,7 @@ def decode_LDM_text_feature_v2(recons_img_idx):
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #对CLIP特征的解码
 def decoding_test_1layer(layer_name,remain_rate,decoding_function,n, recons_img_idx):
-    model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码特征选取/{}/解码模型权重保存/{}_remain_{}/'.format(layer_name,decoding_function,remain_rate)
+    model_save_path = './图像重建/数据集/解码特征选取/{}/解码模型权重保存/{}_remain_{}/'.format(layer_name,decoding_function,remain_rate)
 
     if decoding_function == 'fastl2':
         model_name = "fastl2_n_feat_{}.pickle".format(n)
@@ -293,7 +292,7 @@ def decoding_test_1layer(layer_name,remain_rate,decoding_function,n, recons_img_
     x_test = scaler.fit_transform(x_test)
 
     if layer_name != 'VisionTransformer-1':
-        mask = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/解码特征选取/{}/Folder_5_{}.npy'.format(layer_name,remain_rate))
+        mask = np.load('./图像重建/数据集/解码特征选取/{}/Folder_5_{}.npy'.format(layer_name,remain_rate))
     else:
         mask = ''
 
@@ -370,7 +369,7 @@ def decode_from_fMRI(target_layers,remain_rates,decoding_function,n_feats_img,lo
     #c = torch.tensor(decode_LDM_text_feature_v2(recons_img_idx).astype(np.float32)).to(device)
     CLIP_target , feature_masks = decoding_target_layers(target_layers,remain_rates,decoding_function,n_feats_img , recons_img_idx)
 
-    picture_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/stable-diffusion/实验结果/消融实验/对c消融/without_c/picture_{}'.format(recons_img_idx)
+    picture_save_path = './stable-diffusion/实验结果/消融实验/对c消融/without_c/picture_{}'.format(recons_img_idx)
     if not os.path.exists(picture_save_path):
         os.makedirs(picture_save_path)
     # Reconstruction
