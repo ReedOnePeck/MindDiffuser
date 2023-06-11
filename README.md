@@ -5,3 +5,7 @@ This is the official code for the paper "MindDiffuser: Controlled Image Reconstr
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/plane_00.png)<br>
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/four_sub_00.png)<br>
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/cortex_sub2_00.png)<br>
+
+# <p align="center">  Preliminaries  </p> 
+This code was developed and tested with:
+*[ ] Python version 3.8.5
