@@ -13,3 +13,8 @@ This code was developed and tested with:
 *  PyTorch version 1.11.0
 *  A100 40G
 *  The conda environment defined in environment.yml
+
+
+First, set up the conda enviroment as follows:<br>
+    conda env create -f environment.yml  # create conda env
+    conda activate BraVL                # activate conda env
