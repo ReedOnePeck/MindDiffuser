@@ -14,7 +14,9 @@ This is the official code for the paper "MindDiffuser: Controlled Image Reconstr
     Reconstruction results of MindDiffuser on multiple subjects
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/cortex_sub2_00.png)<br>
 
-    During the feature decoding process, we use L2-regularized linear regression model to automatically select voxels to fit three types<br> of feature: semantic feature 𝑐, detail feature 𝑧, and structural feature 𝑍𝐶𝐿𝐼𝑃. We ultilize pycortex to project the weights of each voxel in the fitted model<br> onto the corresponding 3D coordinates in the visual cortex.
+    During the feature decoding process, we use L2-regularized linear regression model to automatically select voxels to fit three types
+    of feature: semantic feature 𝑐, detail feature 𝑧, and structural feature 𝑍𝐶𝐿𝐼𝑃. We ultilize pycortex to project the weights of each 
+    voxel in the fitted model onto the corresponding 3D coordinates in the visual cortex.
 
 # <p align="center">  Preliminaries  </p> 
 This code was developed and tested with:
