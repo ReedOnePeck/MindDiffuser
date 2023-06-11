@@ -8,4 +8,5 @@ This is the official code for the paper "MindDiffuser: Controlled Image Reconstr
 
 # <p align="center">  Preliminaries  </p> 
 This code was developed and tested with:
+
 *[ ] Python version 3.8.5
