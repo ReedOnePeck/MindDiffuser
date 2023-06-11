@@ -21,4 +21,5 @@ First, set up the conda enviroment as follows:<br>
     conda activate MindDiffuser          # activate conda env
 
 # <p align="center">  Data  </p> 
-[NSD dataset] (http://naturalscenesdataset.org/)
+NSD dataset (http://naturalscenesdataset.org/)
+Data preparation (https://github.com/styvesg/nsd)
