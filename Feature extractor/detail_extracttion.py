@@ -81,8 +81,8 @@ def load_model_from_config(config, ckpt, verbose=False):
 
 
 def get_model():
-    config = OmegaConf.load("/nfs/diskstation/DataStation/ChangdeDu/LYZ/stable-diffusion/configs/v1-inference.yaml")
-    model = load_model_from_config(config,"/nfs/diskstation/DataStation/ChangdeDu/LYZ/stable-diffusion/checkpoints/sd-v1-4.ckpt")
+    config = OmegaConf.load("./stable-diffusion/configs/v1-inference.yaml")
+    model = load_model_from_config(config,"./stable-diffusion/checkpoints/sd-v1-4.ckpt")
     return model
 
 
@@ -98,7 +98,7 @@ def save_file(j):
         img = load_img(stim, i).to(device)
         z = model.get_first_stage_encoding(model.encode_first_stage(img)).cpu().detach().numpy().squeeze()
         VAE.append(z)
-    np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/val_stim_lattent_z.npy'.format(j),VAE)
+    np.save('/val_stim_lattent_z.npy'.format(j),VAE)
     print("被试{}数据已处理完毕".format(j))
     return
 
@@ -119,7 +119,7 @@ prompt = "a green airplane"
 c = model.get_learned_conditioning([prompt])
 samples = sampler.decode(z_enc, c, 35, unconditional_guidance_scale=5.0,unconditional_conditioning=uc,)
 
-picture_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/stable-diffusion/实验结果/15_768以及反向传播/picture_10'
+picture_save_path = './stable-diffusion/实验结果/15_768以及反向传播/picture_10'
 
 x_samples_ddim = model.decode_first_stage(samples)
 x_samples_ddim = torch.clamp((x_samples_ddim + 1.0) / 2.0, min=0.0, max=1.0)
