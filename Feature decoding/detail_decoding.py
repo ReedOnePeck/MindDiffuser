@@ -12,7 +12,7 @@ import fastl2lir
 ROIs = ['VO','V1','V2','V3','V3ab','PHC','MT','MST','LO','IPS','hV4']
 trn_file_ex = '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj07/func1pt8mm/betas_fithrf_GLMdenoise_RR/trn_voxel_data_'
 val_file_ex = '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj07/func1pt8mm/betas_fithrf_GLMdenoise_RR/val_voxel_multi_trial_data_'
-l = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/sub7/trn_stim_lattent_z.npy')
+l = np.load('./图像重建/数据集/Stable-diffusion隐空间特征/sub7/trn_stim_lattent_z.npy')
 
 def fetch_ROI_voxel(file_ex,ROIs):
     file_paths = [file_ex+roi+'.npy' for roi in ROIs]
@@ -77,7 +77,7 @@ def reverse_reshape_z(d, mean, std):
     b_reverse = np.array(e)
     return b_reverse
 #-------------------------------------------------------------------------------------------------------------------------------
-model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征/sub7/'
+model_save_path = './图像重建/数据集/Stable-diffusion隐空间特征/sub7/'
 if not os.path.exists(model_save_path):
     os.makedirs(model_save_path)
 
@@ -130,7 +130,7 @@ print(preds)
 def decode_LDM_text_feature(n,recons_img_idx):
     x_test = fetch_ROI_voxel(val_file_ex, ROIs)  # [recons_img_idx:recons_img_idx + 1, :]
     x_test = scaler.fit_transform(x_test)
-    model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion隐空间特征'
+    model_save_path = './图像重建/数据集/Stable-diffusion隐空间特征'
     model_name = "仅有视觉区体素fastl2_n_feat_{}.pickle".format(n)
     f_save = open(model_save_path + model_name, 'rb')
     model = pickle.load(f_save)
