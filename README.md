@@ -26,19 +26,23 @@ This code was developed and tested with:
 *  A100 40G
 *  The conda environment defined in environment.yml
 
-
-First, set up the conda enviroment as follows:<br>
-
-    conda env create -f environment.yml  # create conda env
-    conda activate MindDiffuser          # activate conda env
-
 # <p align="center">  Data  </p> 
     NSD dataset http://naturalscenesdataset.org/
     Data preparation https://github.com/styvesg/nsd
 
 # <p align="center">  Experiments  </p> 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/1686488621334.png)
+
 ## <p> MindDiffuser </p>
+### <p> Model preparation  </p>
+First, set up the conda enviroment as follows:<br>
+
+    conda env create -f environment.yml  # create conda env
+    conda activate MindDiffuser          # activate conda env
+
+### <p> Feature extraction </p>
+### <p> Feature decoding </p>
+### <p> Image reconstruction </p>
 
 ## <p> Reproduce the results of "High-resolution image reconstruction with latent diffusion models from human brain activity"(CVPR2023)  </p>
 
