@@ -26,9 +26,9 @@ This code was developed and tested with:
 *  A100 40G
 *  The conda environment defined in environment.yml
 
-# <p align="center">  Data  </p> 
-    NSD dataset http://naturalscenesdataset.org/
-    Data preparation https://github.com/styvesg/nsd
+# <p align="center">  Dataset  </p> 
+    `NSD dataset` http://naturalscenesdataset.org/
+    `Data preparation` https://github.com/styvesg/nsd
 
 # <p align="center">  Experiments  </p> 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/1686488621334.png)
