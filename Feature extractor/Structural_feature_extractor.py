@@ -150,37 +150,5 @@ np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/su
 print("训练集数据保存完毕")
 
 
-#二、CLIP文本特征
-#其实可以不要这一部分，因为之前做重建天花板的时候就没有考虑拿CLIP文本特征做约束
 
 
-
-#三、LDM自带的文本编码器的文本特征
-
-
-
-
-
-
-#-------------------------------------------------------------------------------------------------------------------------------------------------------
-
-"""
-from scipy.io import loadmat
-exp_design = loadmat("/nfs/diskstation/DataStation/public_dataset/NSD/nsddata/experiments/nsd/nsd_expdesign.mat")
-ordering = exp_design['masterordering'].flatten() - 1  #ordering中存放10000张图像在刺激时呈现的顺序
-data_size = 27750                                      #被试1实际测量出的刺激-fMRI信号对
-ordering_data = ordering[:data_size]
-shared_mask = ordering_data<1000                       #10000张图像中，前1000张是所有被试都会看的，这些fMRI数据作为验证集
-b = ordering_data[shared_mask]
-idx, idx_count = np.unique(ordering_data, return_counts=True)
-idx_list = [ordering_data==i for i in idx]
-shared_mask_mt = idx<1000
-c = idx[shared_mask_mt]
-"""
-"""
-对NSD数据集中sub1数据的描述：
-（1）被试1的刺激数据集一共是10000张图像（前1000张对应的fMRI作为val_set，后9000张对应trn_set），总共呈现3次，即30000次刺激，呈现顺序在ordering_data中，但是只测得了27750组刺激-fMRI对。
-对这些测得的数据，按照刺激索引平均后，得到9841组训练集数据，982组验证集数据
-（2）这10000张图像在COCO中的索引在/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_stimuli/stimuli/nsd/nsd_stim_info_merged.csv中查找
-但是由于这10000张图像在csv文件中是乱序的，没办法直接索引验证集中图像对应的COCO索引，因此后续在重建验证集图像的时候，首先，在csv文件中把shared图像及其COCO索引挑出来，然后从COCO中索引出图像和验证集的图像一一对应（肉眼观察）
-"""
