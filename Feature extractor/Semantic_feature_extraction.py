@@ -37,8 +37,8 @@ def load_model_from_config(config, ckpt, verbose=False):
     return model
 
 def get_model():
-    config = OmegaConf.load("/nfs/diskstation/DataStation/ChangdeDu/LYZ/stable-diffusion/configs/v1-inference.yaml")
-    model = load_model_from_config(config, "/nfs/diskstation/DataStation/ChangdeDu/LYZ/stable-diffusion/checkpoints/sd-v1-4.ckpt")
+    config = OmegaConf.load("./stable-diffusion/configs/v1-inference.yaml")
+    model = load_model_from_config(config, "./stable-diffusion/checkpoints/sd-v1-4.ckpt")
     return model
 
 LDM_model = get_model().to(device)
@@ -143,7 +143,7 @@ def get_text_features(coco_ids_path , stimuli_data_path ):
         text_feature = clip_model.encode_text(text)  #(5,512)
 
         cos_sim = torch.cosine_similarity(img_feature ,text_feature).cpu().detach().numpy()
-        cos_soft = np.exp(cos_sim)/np.sum(np.exp(cos_sim))    #多拿几个图试试
+        cos_soft = np.exp(cos_sim)/np.sum(np.exp(cos_sim))    
         ind = np.argmax(cos_soft)
 
         cap_clip_feature = text_feature[ind,:].cpu().detach().numpy()
@@ -164,8 +164,8 @@ def get_text_features(coco_ids_path , stimuli_data_path ):
         caps_LDM_feature_average.append(cap_LDM_feature_average)
 
     #np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj01/func1pt8mm/betas_fithrf_GLMdenoise_RR/trn_caps_clip_feature.npy',caps_clip_feature)
-    #np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/sub2/val_caps_LDM_feature_len_15_random.npy',caps_LDM_feature_random)
-    np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/数据集/Stable-diffusion文本特征/sub7/trn_caps_LDM_feature_len_15_average.npy',caps_LDM_feature_average)
+    #np.save('./图像重建/数据集/Stable-diffusion文本特征/sub2/val_caps_LDM_feature_len_15_random.npy',caps_LDM_feature_random)
+    np.save('./图像重建/数据集/Stable-diffusion文本特征/sub7/trn_caps_LDM_feature_len_15_average.npy',caps_LDM_feature_average)
     return
 
 a = get_text_features(coco_ids_path,stimuli_data_path)
