@@ -35,3 +35,6 @@ First, set up the conda enviroment as follows:<br>
 # <p align="center">  Data  </p> 
     NSD dataset http://naturalscenesdataset.org/
     Data preparation https://github.com/styvesg/nsd
+
+# <p align="center">  Experiments  </p> 
+## <p> Reproduce the results of Takagi</p>
