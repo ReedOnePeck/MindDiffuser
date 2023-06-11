@@ -27,8 +27,8 @@ This code was developed and tested with:
 *  The conda environment defined in environment.yml
 
 # <p align="center">  Dataset  </p> 
-    `NSD dataset` http://naturalscenesdataset.org/
-    `Data preparation` https://github.com/styvesg/nsd
+`NSD dataset` http://naturalscenesdataset.org/  <br>
+`Data preparation` https://github.com/styvesg/nsd
 
 # <p align="center">  Experiments  </p> 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/1686488621334.png)
