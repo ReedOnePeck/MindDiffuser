@@ -3,7 +3,7 @@
 from pytorch_pretrained_biggan import BigGAN, convert_to_images, one_hot_from_names, utils
 import sys
 import os
-sys.path.append('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/ic_gan')
+sys.path.append('./图像重建/对照实验/ic-gan-recons/ic_gan')
 
 import torch 
 
@@ -100,7 +100,7 @@ def load_feature_extractor(gen_model, last_feature_extractor, feature_extractor)
     if feat_ext_name == 'classification':
       feat_ext_path = ''
     else:
-      feat_ext_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/ic_gan/pretrained_models/swav_pretrained.pth.tar'
+      feat_ext_path = './图像重建/对照实验/ic-gan-recons/ic_gan/pretrained_models/swav_pretrained.pth.tar'
     last_feature_extractor = feat_ext_name
     feature_extractor = data_utils.load_pretrained_feature_extractor(feat_ext_path, feature_extractor = feat_ext_name)
     feature_extractor.eval()
