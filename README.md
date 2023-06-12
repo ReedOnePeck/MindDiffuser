@@ -24,7 +24,7 @@ This code was developed and tested with:
 *  Python version 3.8.5
 *  PyTorch version 1.11.0
 *  A100 40G
-*  The conda environment defined in environment.yml
+*  The conda environment defined in environment_1.yml
 
 # <p align="center">  Dataset  </p> 
 `NSD dataset` http://naturalscenesdataset.org/  <br>
@@ -37,7 +37,7 @@ This code was developed and tested with:
 ### <p> Model preparation  </p>
 First, set up the conda enviroment as follows:<br>
 
-    conda env create -f environment1.yml  # create conda env
+    conda env create -f environment_1.yml  # create conda env
     conda activate MindDiffuser          # activate conda env
 
 ### <p> Feature extraction </p>
