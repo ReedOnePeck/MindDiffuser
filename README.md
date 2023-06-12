@@ -41,6 +41,12 @@ First, set up the conda enviroment as follows:<br>
     conda activate MindDiffuser          # activate conda env
 
 ### <p> Feature extraction </p>
+    cd your_folder
+    python Feature extractor/Semantic_feature_extraction.py
+    python Feature extractor/detail_extracttion.py
+    python Feature extractor/Structural_feature_extraction.py
+    python Feature extractor/Structural_feature_selection.py
+
 ### <p> Feature decoding </p>
 ### <p> Image reconstruction </p>
 
