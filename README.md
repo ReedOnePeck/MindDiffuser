@@ -55,6 +55,7 @@ First, set up the conda enviroment as follows:<br>
     
 ### <p> Image reconstruction </p>
 I will upload files such as `mask.npy`, `checkpoints of decoders`, etc. to the checkpoints folder.
+
     cd your_folder
     python Image reconstruction/Reconstruction.py
 
