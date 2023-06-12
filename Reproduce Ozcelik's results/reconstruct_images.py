@@ -9,7 +9,7 @@ import os
 #import fastl2lir
 import numpy as np
 import sys
-sys.path.append('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/ic_gan')
+sys.path.append('./图像重建/对照实验/ic-gan-recons/ic_gan')
 import ic_gan.inference.utils as inference_utils
 from torch import nn
 import torch
@@ -30,7 +30,7 @@ def replace_to_inplace_relu(model):  # saves memory; from https://github.com/min
       replace_to_inplace_relu(child)
   return
 
-def load_icgan(experiment_name, root_ = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/ic_gan/pretrained_models'):
+def load_icgan(experiment_name, root_ = './图像重建/对照实验/ic-gan-recons/ic_gan/pretrained_models'):
   root = os.path.join(root_, experiment_name)
   config = torch.load("%s/%s.pth" %(root, "state_dict_best0"))['config']
 
@@ -71,10 +71,10 @@ x = fetch_ROI_voxel(val_file_ex, ROIs)  # (8859,11694)
 x = scaler.fit_transform(x)
 
 
-mean = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/results/解码模型保存/mean.npy')#.reshape(1,-1)
-std = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/results/解码模型保存/std.npy')#.reshape(1,-1)
+mean = np.load('./图像重建/对照实验/ic-gan-recons/results/解码模型保存/mean.npy')#.reshape(1,-1)
+std = np.load('./图像重建/对照实验/ic-gan-recons/results/解码模型保存/std.npy')#.reshape(1,-1)
 
-model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/results/解码模型保存/'
+model_save_path = './图像重建/对照实验/ic-gan-recons/results/解码模型保存/'
 
 model_name = "fastl2_n_feat_{}.pickle".format(200)
 f_save = open(model_save_path + model_name, 'rb')
@@ -93,7 +93,7 @@ def recons_ic_gan(idx):
     grid = rearrange(out, 'b c h w -> (b) c h w')
     grid = make_grid(grid, nrow=1)
     grid = 255. * rearrange(grid, 'c h w -> h w c').cpu().detach().numpy()
-    Image.fromarray(grid.astype(np.uint8)).save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/results/重建结果/测试集重建/test{}.png'.format(idx))
+    Image.fromarray(grid.astype(np.uint8)).save('./图像重建/对照实验/ic-gan-recons/results/重建结果/测试集重建/test{}.png'.format(idx))
     return
 
 for i in tqdm(range(982)):
