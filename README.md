@@ -60,9 +60,18 @@ I will upload files such as `features.npy`,`mask.npy`, `checkpoints of decoders`
     python Image reconstruction/Reconstruction.py
 
 ## <p> Reproduce the results of "High-resolution image reconstruction with latent diffusion models from human brain activity"(CVPR2023)  </p>
+After extracting and decoding the features, run the following code：
 
+    cd your_folder
+    python Reproduce Takagi's results/image_reconstruction.py
 ## <p> Reproduce the results of "Reconstruction of Perceived Images from fMRI Patterns and Semantic Brain Exploration using Instance-Conditioned GANs" </p>
+After configuring the environment and codes provided by Ozcelik, run the following codes:
 
+    cd your_folder
+    python Reproduce Ozcelik's results/extract_features.py
+    python Reproduce Ozcelik's results/train_regression.py
+    python Reproduce Ozcelik's results/reconstruct_images.py
+    
 
 
 
