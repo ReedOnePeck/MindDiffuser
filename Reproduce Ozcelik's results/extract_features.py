@@ -15,7 +15,7 @@ class batch_generator_external_images(Dataset):
     :param batch_size: batch size
     :param ext_dir: directory containing images
     """
-    def __init__(self, data_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/stims/images_256.npz', mode='test_images'):
+    def __init__(self, data_path = './图像重建/对照实验/ic-gan-recons/stims/images_256.npz', mode='test_images'):
         self.data_path = data_path
         self.data = np.load(self.data_path)
         self.mode = mode
@@ -41,7 +41,7 @@ feature_extractor, last_feature_extractor = load_feature_extractor(gen_model, la
 eps = 1e-8
 
 
-image_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/stims/images_256.npz'
+image_path = './图像重建/对照实验/ic-gan-recons/stims/images_256.npz'
 batch_size = 5
 train_images = batch_generator_external_images(data_path = image_path, mode='train_images')
 trainloader = DataLoader(train_images,batch_size,shuffle=False)
@@ -76,4 +76,4 @@ for i,batch in enumerate(trainloader):
   train_instance[i*batch_size: (i+1)*batch_size] = input_features
   print(i*batch_size)
 
-np.savez('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/stims/extracted_features/instance_features.npz', train_instance=train_instance, test_instance=test_instance)
+np.savez('./图像重建/对照实验/ic-gan-recons/stims/extracted_features/instance_features.npz', train_instance=train_instance, test_instance=test_instance)
