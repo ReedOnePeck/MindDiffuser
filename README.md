@@ -48,7 +48,15 @@ First, set up the conda enviroment as follows:<br>
     python Feature extractor/Structural_feature_selection.py
 
 ### <p> Feature decoding </p>
+    cd your_folder
+    python Feature decoding/Semantic_feature_decoding.py
+    python Feature decoding/Structural_feature_decoding.py
+    python Feature decoding/detail_decoding.py
+    
 ### <p> Image reconstruction </p>
+I will upload files such as `mask.npy`, `checkpoints of decoders`, etc. to the checkpoints folder.
+    cd your_folder
+    python Image reconstruction/Reconstruction.py
 
 ## <p> Reproduce the results of "High-resolution image reconstruction with latent diffusion models from human brain activity"(CVPR2023)  </p>
 
