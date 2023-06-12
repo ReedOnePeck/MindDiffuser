@@ -37,7 +37,7 @@ This code was developed and tested with:
 ### <p> Model preparation  </p>
 First, set up the conda enviroment as follows:<br>
 
-    conda env create -f environment.yml  # create conda env
+    conda env create -f environment1.yml  # create conda env
     conda activate MindDiffuser          # activate conda env
 
 ### <p> Feature extraction </p>
