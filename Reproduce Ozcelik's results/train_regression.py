@@ -10,7 +10,7 @@ import os
 import fastl2lir
 import numpy as np
 import sys
-sys.path.append('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/ic_gan')
+sys.path.append('./图像重建/对照实验/ic-gan-recons/ic_gan')
 import ic_gan.inference.utils as inference_utils
 from torch import nn
 import torch
@@ -53,15 +53,15 @@ x = scaler.fit_transform(x)
 x_trn = x[:8000, :]
 x_val = x[8000:, :]
 
-y = np.load('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/stims/extracted_features/instance_features.npz')['train_instance']
+y = np.load('./图像重建/对照实验/ic-gan-recons/stims/extracted_features/instance_features.npz')['train_instance']
 data_,mean,s = z_score(y)
-np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/results/解码模型保存/mean.py',mean)
-np.save('/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/results/解码模型保存/std.py',s)
+np.save('./图像重建/对照实验/ic-gan-recons/results/解码模型保存/mean.py',mean)
+np.save('./图像重建/对照实验/ic-gan-recons/results/解码模型保存/std.py',s)
 
 y_trn = data_[:8000, :]
 y_val = data_[8000:, :]
 
-model_save_path = '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/ic-gan-recons/results/解码模型保存/'
+model_save_path = './图像重建/对照实验/ic-gan-recons/results/解码模型保存/'
 
 def training_decode_LDM_text_feature(n , save):
 	model = fastl2lir.FastL2LiR()
