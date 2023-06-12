@@ -24,5 +24,5 @@ def load_generator(exp_name, root_path, backbone, device="cpu"):
 	generator.eval()
 	return generator
 generator = load_generator('icgan_biggan_imagenet_res256',
-                           '/nfs/diskstation/DataStation/ChangdeDu/LYZ/图像重建/对照实验/Cortex2Image/ic_gan/pretrained_models', 'biggan')
+                           './图像重建/对照实验/Cortex2Image/ic_gan/pretrained_models', 'biggan')
 print('生成器加载完毕')
