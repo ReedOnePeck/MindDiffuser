@@ -2,6 +2,7 @@
 This is the official code for the paper "MindDiffuser: Controlled Image Reconstruction from Human Brain Activity with Semantic and Structural Diffusion"<br>
 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/overview.png)<br>
+![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/Algorithm.png)<br>
 
     Schematic diagram of MindDiffuser. 
     (a) Decoders are trained to fit fMRI with averaged CLIP text embeddings 𝑐, CLIP image feature 𝑍𝑖𝐶𝐿𝐼𝑃, and VQ-VAE latent feature 𝑧.
