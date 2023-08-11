@@ -7,12 +7,10 @@ from tqdm import tqdm
 import pickle
 import os
 import fastl2lir
+import argparse
 
-#x
+
 ROIs = ['VO','V1','V2','V3','V3ab','PHC','MT','MST','LO','IPS','hV4']
-trn_file_ex = '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj07/func1pt8mm/betas_fithrf_GLMdenoise_RR/trn_voxel_data_'
-val_file_ex = '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj07/func1pt8mm/betas_fithrf_GLMdenoise_RR/val_voxel_multi_trial_data_'
-l = np.load('./图像重建/数据集/Stable-diffusion隐空间特征/sub7/trn_stim_lattent_z.npy')
 
 def fetch_ROI_voxel(file_ex,ROIs):
     file_paths = [file_ex+roi+'.npy' for roi in ROIs]
@@ -77,23 +75,6 @@ def reverse_reshape_z(d, mean, std):
     b_reverse = np.array(e)
     return b_reverse
 #-------------------------------------------------------------------------------------------------------------------------------
-model_save_path = './图像重建/数据集/Stable-diffusion隐空间特征/sub7/'
-if not os.path.exists(model_save_path):
-    os.makedirs(model_save_path)
-
-y = reshape(l)
-mean = np.mean(y,axis=0).reshape(1, -1)
-std = np.std(y,axis=0).reshape(1, -1)
-y_z_score = scaler.fit_transform(y)
-y_trn = y_z_score[:, :]
-y_val = y_z_score[8000:, :]
-
-#x
-x = fetch_ROI_voxel(trn_file_ex, ROIs)  # (8859,11694)
-x = scaler.fit_transform(x)
-x_trn = x[:, :]
-x_val = x[8000:, :]
-
 def training_decode_LDM_text_feature(n , save):
 	model = fastl2lir.FastL2LiR()
 	model.fit(x_trn, y_trn, alpha=0.15, n_feat=n)
@@ -112,32 +93,50 @@ def training_decode_LDM_text_feature(n , save):
 	print("使用{}个体素的预测准确率为{}".format(n,np.mean(cor)))
 	return np.mean(cor)
 
-#----------------------------------------------------------------------------------------------------------------------
-voxels = [3000]
-preds = []
-for n in voxels:
-	pred = training_decode_LDM_text_feature(n=n , save=True)
-	preds.append(pred)
-print(preds)
-#best_n_index = preds.index(max(preds))
-#best_n = voxels[best_n_index]
-#a = training_decode_LDM_text_feature(n=best_n  , save=True)
-#print("最佳准确率是{}，最佳体素数量是{}".format(a,best_n))
-
-#-----------------------------------------------------------------------------------------------------------------------
-
-
-def decode_LDM_text_feature(n,recons_img_idx):
+def decode_LDM_text_feature(n,recons_img_idx,model_save_path):
     x_test = fetch_ROI_voxel(val_file_ex, ROIs)  # [recons_img_idx:recons_img_idx + 1, :]
     x_test = scaler.fit_transform(x_test)
-    model_save_path = './图像重建/数据集/Stable-diffusion隐空间特征'
-    model_name = "仅有视觉区体素fastl2_n_feat_{}.pickle".format(n)
+	
+    model_name = "fastl2_n_feat_{}.pickle".format(n)
     f_save = open(model_save_path + model_name, 'rb')
     model = pickle.load(f_save)
     f_save.close()
     pred = model.predict(x_test)[recons_img_idx:recons_img_idx + 1, :]
     z_after_reverse = reverse_reshape_z(pred, mean, std)
     return z_after_reverse
+	
+#-------------------------------------------------------------------------------------------------------------------------------
 
 
+def main():
+    parser = argparse.ArgumentParser(description='Structural_feature_extraction')
+    parser.add_argument('--trn_file_ex', default='', type=str)
+    parser.add_argument('--val_file_ex', default='', type=str)
+    parser.add_argument('--model_save_path ', default='', type=str)
+    parser.add_argument('--trn_VAE_feature_path ', default='', type=str)
+    parser.add_argument('--val_VAE_feature_path ', default='', type=str)
 
+    args = parser.parse_args()
+
+    l = np.load(args.trn_VAE_feature_path)
+    if not os.path.exists(args.model_save_path):
+        os.makedirs(args.model_save_path)
+
+    y = reshape(l)
+    mean = np.mean(y,axis=0).reshape(1, -1)
+    std = np.std(y,axis=0).reshape(1, -1)
+    y_z_score = scaler.fit_transform(y)
+    y_trn = y_z_score[:, :]
+    y_val = y_z_score[8000:, :]
+
+
+    x = fetch_ROI_voxel(args.trn_file_ex, ROIs)  # (8859,11694)
+    x = scaler.fit_transform(x)
+    x_trn = x[:, :]
+    x_val = x[8000:, :]
+
+    pred = training_decode_LDM_text_feature(n=3000 , save=True)
+	
+
+if __name__ == "__main__":
+    main()
