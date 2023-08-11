@@ -1,6 +1,5 @@
 #https://github.com/styvesg/nsd/blob/master/torched_alexnet_fwrf.ipynb
 #https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocoDemo.ipynb
-
 import os
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -9,20 +8,13 @@ from torch.utils.data import DataLoader
 from torch.utils.data import Dataset
 import torchvision
 from torchvision import transforms
-
 from packages import model_options as MO
 from packages import feature_extraction_detach as FE
-
-#from himalaya.lasso import SparseGroupLassoCV
-
-#from himalaya.backend import set_backend
-#backend = set_backend("torch_cuda", on_error="warn")
-
+import argparse
 os.environ['CUDA_VISIBLE_DEVICES'] = '7'
 device = torch.device('cuda:0')
 #--------------------------------------------------------------------------------------------------------------------------------
-#提取训练集和验证集图像刺激的CLIP特征
-def CLIP_extraction(filepath):
+def CLIP_extraction(filepath, target_layers):
     model_string = 'ViT-B/32_clip'
     model_option = MO.get_model_options()[model_string]
     image_transforms = MO.get_recommended_transforms(model_string)
@@ -59,9 +51,9 @@ def CLIP_extraction(filepath):
         def __len__(self):
             return self.data_tensor.size(0)
 
-    data_tensor = torch.tensor(np.load(filepath))#[8000:,:,:]
+    data_tensor = torch.tensor(np.load(filepath))
     stimulus_loader = DataLoader(TensorDataset(data_tensor, transform_for_CLIP), batch_size=64)
-    target_layers = ['Linear-2', 'Linear-4', 'Linear-6', 'Linear-8', 'Linear-10', 'Linear-12','VisionTransformer-1']
+
     feature_maps = FE.get_all_feature_maps(model, stimulus_loader, layers_to_retain=target_layers,
                                            remove_duplicates=False, numpy=True)
 
@@ -78,76 +70,48 @@ def z_score(data):
     return data_,mean,s
 
 def z_score_all_features(feature_maps):
-    """
-    对所有的CLIP提出来的特征进行标准化，并且记录下没他们的均值与标准差方便后续的反变换
-    :param feature_maps: CLIP提出来的特征
-    :return:
-    """
     y=np.concatenate([feature_maps[feature_map] for feature_map in feature_maps ],axis=1)
     data_zscore, mean_all, std_all=z_score(y)
     return data_zscore,mean_all,std_all
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------
-#处理数据集文本编码文本编码
-def make_texts(file_path):
-    """
-    :param file_path: 存储训练集/验证集刺激的文本路径
-    :return: 把文本提取出来
-    """
+    
 
-    return
+def main():
+    parser = argparse.ArgumentParser(description='Structural_feature_extraction')
+    parser.add_argument('--target_layers', help='CLIP_layers', default=['Linear-2', 'Linear-4', 'Linear-6', 'Linear-8', 'Linear-10', 'Linear-12','VisionTransformer-1'], type=list)
+    parser.add_argument('--stim_sub1_trn', help='stim_trn_saved path', default='', type=str)        #(8859,3,256,256)
+    parser.add_argument('--stim_sub1_val_multi', help='stim_val_saved path', default='', type=str)  #(982,3,256,256)
+    parser.add_argument('--feature_sub1_trn', help='feature_trn_saved root', default='', type=str)
+    parser.add_argument('--feature_sub1_val_multi', help='feature_val_saved root', default='', type=str)
+    args = parser.parse_args()
+    
+    stim_sub1_val_CLIP = CLIP_extraction(args.stim_sub1_val_multi, args.target_layers)
+    y=np.concatenate([stim_sub1_val_CLIP[feature_map] for feature_map in stim_sub1_val_CLIP ],axis=1)
+    data_zscore_val , mean_val , std_val = z_score_all_features(stim_sub1_val_CLIP)
+    np.save(args.feature_sub1_val_multi + 'Raw_validation_CLIP.npy', y)
+    print("Raw_validation_feature_Done")
 
-#提取LDM文本编码器的特征
-def text_feature_LDM(texts):
-    return
+    np.save(args.feature_sub1_val_multi + 'val_stim_CLIP_zscore.npy', data_zscore_val)
+    np.save(args.feature_sub1_val_multi + 'val_stim_CLIP_mean.npy', mean_val)
+    np.save(args.feature_sub1_val_multi + 'val_stim_CLIP_std.npy', std_val)
+    print("Z_scored_validation_feature_Done")
 
+    stim_sub1_trn_CLIP = CLIP_extraction(args.stim_sub1_trn, args.target_layers)
+    y=np.concatenate([stim_sub1_trn_CLIP[feature_map] for feature_map in stim_sub1_trn_CLIP ],axis=1)
+    data_zscore_val , mean_val , std_val = z_score_all_features(stim_sub1_trn_CLIP)
+    np.save(args.feature_sub1_trn + 'Raw_trn_CLIP.npy', y)
+    print("Raw_trn_feature_Done")
 
-
-
-
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-#(8859,2392)
-#sub1_trn = '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj01/func1pt8mm/betas_fithrf_GLMdenoise_RR/trn_voxel_data_V1.npy'
-#(982,2392)
-#sub1_val_multi = '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj01/func1pt8mm/betas_fithrf_GLMdenoise_RR/val_voxel_multi_trial_data_V1.npy'
-
-#(8859,3,256,256)
-stim_sub1_trn = '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/trn_stim_data.npy'
-#(982,3,256,256)
-stim_sub1_val_multi = '/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/val_stim_multi_trial_data.npy'
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------
-#数据处理与存储
-#一、CLIP视觉特征
-
-"""
-stim_sub1_val_CLIP = CLIP_extraction(stim_sub1_val_multi)
-y=np.concatenate([stim_sub1_val_CLIP[feature_map] for feature_map in stim_sub1_val_CLIP ],axis=1)
-data_zscore_val , mean_val , std_val = z_score_all_features(stim_sub1_val_CLIP)
-print("验证集数据提取完毕")
-print(mean_val)
-np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/部分CLIP特征/val_stim_CLIP.npy', y)
+    np.save(args.feature_sub1_trn + 'trn_stim_CLIP_zscore.npy', data_zscore_trn)
+    np.save(args.feature_sub1_trn + 'trn_stim_CLIP_mean.npy', mean_trn)
+    np.save(args.feature_sub1_trn + 'trn_stim_CLIP_std.npy', std_trn)
+    print("Z_scored_trn_feature_Done")
 
 
-#(984,38400*12+512)  存储的是zcore后的训练集存储数据，其中CLIP的特征只提取了2-24层的偶数层特征。以及最后的512维的语义特征
-np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/部分CLIP特征/val_stim_CLIP_zscore.npy', data_zscore_val)
-np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/部分CLIP特征/val_stim_CLIP_mean.npy', mean_val)
-np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/部分CLIP特征/val_stim_CLIP_std.npy', std_val)
-print("验证集数据保存完毕")
-"""
-
-stim_sub1_trn_CLIP = CLIP_extraction(stim_sub1_val_multi)
-y=np.concatenate([stim_sub1_trn_CLIP[feature_map] for feature_map in stim_sub1_trn_CLIP ],axis=1)
-data_zscore_trn , mean_trn , std_trn = z_score_all_features(stim_sub1_trn_CLIP)
-print("训练集数据提取完毕")
-np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/部分CLIP特征/trn_stim_CLIP_8.npy', y)
+if __name__ == "__main__":
+    main()
 
 
 
-#(8859,38400*12+512)  存储的是zcore后的训练集存储数据，其中CLIP的特征只提取了2-24层的偶数层特征。以及最后的512维的语义特征
-np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/部分CLIP特征/trn_stim_CLIP_zscore_8.npy', data_zscore_trn)
-np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/部分CLIP特征/trn_stim_CLIP_mean_8.npy', mean_trn)
-np.save('/nfs/diskstation/DataStation/public_dataset/NSD/nsddata_betas/ppdata/subj02/func1pt8mm/betas_fithrf_GLMdenoise_RR/部分CLIP特征/trn_stim_CLIP_std_8.npy', std_trn)
-print("训练集数据保存完毕")
 
 
 
