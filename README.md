@@ -1,5 +1,5 @@
 # <p align="center">  MindDiffuser  </p> 
-This is the official code for the paper "MindDiffuser: Controlled Image Reconstruction from Human Brain Activity with Semantic and Structural Diffusion"<br>
+This is the official code for the paper "MindDiffuser: Controlled Image Reconstruction from Human Brain Activity with Semantic and Structural Diffusion"(ACMMM2023)<br>
 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/Picture2.png)<br>
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/A.png)<br>
