@@ -30,6 +30,7 @@ This code was developed and tested with:
 # <p align="center">  Dataset  </p> 
 `NSD dataset` http://naturalscenesdataset.org/  <br>
 `Data preparation` https://github.com/styvesg/nsd
+![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/NSD.png)
 
 # <p align="center">  Experiments  </p> 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/1686488621334.png)
