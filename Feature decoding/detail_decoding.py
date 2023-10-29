@@ -126,13 +126,13 @@ def main():
     mean = np.mean(y,axis=0).reshape(1, -1)
     std = np.std(y,axis=0).reshape(1, -1)
     y_z_score = scaler.fit_transform(y)
-    y_trn = y_z_score[:, :]
+    y_trn = y_z_score[:8000, :]
     y_val = y_z_score[8000:, :]
 
 
     x = fetch_ROI_voxel(args.trn_file_ex, ROIs)  # (8859,11694)
     x = scaler.fit_transform(x)
-    x_trn = x[:, :]
+    x_trn = x[:8000, :]
     x_val = x[8000:, :]
 
     pred = training_decode_LDM_text_feature(n=3000 , save=True)
