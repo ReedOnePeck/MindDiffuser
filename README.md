@@ -30,7 +30,9 @@ This code was developed and tested with:
 
 # <p align="center">  Dataset  </p> 
 `NSD dataset` http://naturalscenesdataset.org/  <br>
-`Data preparation` https://github.com/styvesg/nsd
+`Data preparation` https://github.com/styvesg/nsd  <br>
+After preprocessing the NSD data, please organize the image stimuli in the training set into a .npy file with dimensions (8859, 3, 512, 512), and the image stimuli in the test set  into a .npy file with dimensions (982, 3, 512, 512), stored in ：your_folder/data/stimuli_data/. And store the fMRI data in ：your_folder/data/response_data/. 
+
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/NSD.png)
 
 # <p align="center">  Experiments  </p> 
@@ -57,7 +59,6 @@ First, set up the conda enviroment as follows:<br>
     python Feature decoding/detail_decoding.py
     
 ### <p> Image reconstruction </p>
-I will upload files such as `features.npy`,`mask.npy`, `checkpoints of decoders`, etc. to the checkpoints folder.
 
     cd your_folder
     python Image reconstruction/Reconstruction.py
