@@ -69,8 +69,8 @@ def load_model_from_config(config, ckpt, verbose=False):
 
 
 def get_model():
-    config = OmegaConf.load("./stable-diffusion/configs/v1-inference.yaml")
-    model = load_model_from_config(config,"./stable-diffusion/checkpoints/sd-v1-4.ckpt")
+    config = OmegaConf.load("/your_folder/data/pretrained_models/v1-inference.yaml")
+    model = load_model_from_config(config,"/your_folder/data/pretrained_models/sd-v1-4.ckpt")
     return model
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,9 +86,9 @@ def save_file(stim_path, feature_path):
 
 def main():
     parser = argparse.ArgumentParser(description='VQVAE feature extraction')
-    parser.add_argument('--stable_diffusion_config_path',  default='', type=str)
-    parser.add_argument('--stable_diffusion_skpt_path',  default='', type=str)
-    parser.add_argument('--stim_saved_path',  default='', type=str)
+    parser.add_argument('--stable_diffusion_config_path',  default='/your_folder/data/pretrained_models/v1-inference.yaml', type=str)
+    parser.add_argument('--stable_diffusion_skpt_path',  default='/your_folder/data/pretrained_models/sd-v1-4.ckpt', type=str)
+    parser.add_argument('--stim_saved_path',  default='/your_folder/data/stimuli_data/trn_images.npy', type=str)
     parser.add_argument('--feature_saved_path',  default='', type=str)
     args = parser.parse_args()
     
