@@ -5,20 +5,20 @@ This is the official code for the paper "MindDiffuser: Controlled Image Reconstr
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/Picture2.png)<br>
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/A.png)<br>
 
-    Schematic diagram of MindDiffuser. 
-    (a) Decoders are trained to fit fMRI with averaged CLIP text embeddings 𝑐, CLIP image feature 𝑍𝑖𝐶𝐿𝐼𝑃, and VQ-VAE latent feature 𝑧.
-    (b) The two-stage image reconstruction process. In stage 1, an initial reconstructed image is generated using the decoded CLIP text feature 𝑐 and VQ-VAE latent feature 𝑧. In stage 2, the decoded CLIP image feature is used as a constraint to iteratively adjust 𝑐 and 𝑧 until the final reconstruction result matches the original image in terms of both semantic and structure.
+Schematic diagram of MindDiffuser. 
+- (a) Decoders are trained to fit fMRI with averaged CLIP text embeddings 𝑐, CLIP image feature 𝑍𝑖𝐶𝐿𝐼𝑃, and VQ-VAE latent feature 𝑧.
+- (b) The two-stage image reconstruction process. In stage 1, an initial reconstructed image is generated using the decoded CLIP text feature 𝑐 and VQ-VAE latent feature 𝑧. In stage 2, the decoded CLIP image feature is used as a constraint to iteratively adjust 𝑐 and 𝑧 until the final reconstruction result matches the original image in terms of both semantic and structure.
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/plane_00.png)<br>
 
-    A brief comparison of image reconstruction results.
+A brief comparison of image reconstruction results.
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/four_sub_00.png)<br>
 
-    Reconstruction results of MindDiffuser on multiple subjects
+Reconstruction results of MindDiffuser on multiple subjects
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/cortex_sub2_00.png)<br>
 
-    During the feature decoding process, we use L2-regularized linear regression model to automatically select voxels to fit three types
-    of feature: semantic feature 𝑐, detail feature 𝑧, and structural feature 𝑍𝐶𝐿𝐼𝑃. We ultilize pycortex to project the weights of each 
-    voxel in the fitted model onto the corresponding 3D coordinates in the visual cortex.
+During the feature decoding process, we use L2-regularized linear regression model to automatically select voxels to fit three types
+of feature: semantic feature 𝑐, detail feature 𝑧, and structural feature 𝑍𝐶𝐿𝐼𝑃. We ultilize pycortex to project the weights of each 
+voxel in the fitted model onto the corresponding 3D coordinates in the visual cortex.
 
 # <p align="center">  Preliminaries  </p> 
 This code was developed and tested with:
@@ -31,7 +31,7 @@ This code was developed and tested with:
 # <p align="center">  Dataset  </p> 
 `NSD dataset` http://naturalscenesdataset.org/  <br>
 `Data preparation` https://github.com/styvesg/nsd  <br>
-After preprocessing the NSD data, please organize the image stimuli in the training set into a .npy file with dimensions (8859, 3, 512, 512), and the image stimuli in the test set  into a .npy file with dimensions (982, 3, 512, 512), stored in ：your_folder/data/stimuli_data/. And store the fMRI data in ：your_folder/data/response_data/. 
+- After preprocessing the NSD data, please organize the image stimuli in the training set into a .npy file with dimensions (8859, 3, 512, 512), and the image stimuli in the test set  into a .npy file with dimensions (982, 3, 512, 512), stored in ：your_folder/data/stimuli_data/. And store the fMRI data in ：your_folder/data/response_data/. 
 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/NSD.png)
 
@@ -44,9 +44,9 @@ First, set up the conda enviroment as follows:<br>
 
     conda env create -f environment_1.yml  # create conda env
     conda activate MindDiffuser          # activate conda env  <br>
-- [Heading One] To ensure stable execution of our project, it is recommended to first create the virtual environment of Stable Diffusion v1-4 and then add the required Python packages to it. <br>
-- [Heading One] You need to download the checkpoint file :sd-v1-4.ckpt and the config file :v1-inference.yaml for Stable Diffusion v1-4 from Hugging Face. Store them in the folders :/yourfolder/data/pretrained_models/checkpoint/: and :/yourfolder/data/pretrained_models/config/ respectively. <br>
-- [Heading One] After downloading the "v1-inference.yaml" file, change the value of "max_length" to 15 in line 72.
+- To ensure stable execution of our project, it is recommended to first create the virtual environment of Stable Diffusion v1-4 and then add the required Python packages to it. <br>
+- You need to download the checkpoint file :sd-v1-4.ckpt and the config file :v1-inference.yaml for Stable Diffusion v1-4 from Hugging Face. Store them in the folders :/yourfolder/data/pretrained_models/checkpoint/: and :/yourfolder/data/pretrained_models/config/ respectively. <br>
+- After downloading the "v1-inference.yaml" file, change the value of "max_length" to 15 in line 72.
 
 
 ### <p> Feature extraction </p>
