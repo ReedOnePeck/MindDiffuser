@@ -44,8 +44,9 @@ First, set up the conda enviroment as follows:<br>
 
     conda env create -f environment_1.yml  # create conda env
     conda activate MindDiffuser          # activate conda env  <br>
-To ensure stable execution of our project, it is recommended to first create a virtual environment named Stable Diffusion v1-4 and then add the required Python packages to it. <br>
-You need to download the checkpoint file :sd-v1-4.ckpt and the config file :v1-inference.yaml for Stable Diffusion v1-4 from Hugging Face. Store them in the folders :/yourfolder/data/pretrained_models/checkpoint/: and :/yourfolder/data/pretrained_models/config/ respectively.
+To ensure stable execution of our project, it is recommended to first create the virtual environment of Stable Diffusion v1-4 and then add the required Python packages to it. <br>
+You need to download the checkpoint file :sd-v1-4.ckpt and the config file :v1-inference.yaml for Stable Diffusion v1-4 from Hugging Face. Store them in the folders :/yourfolder/data/pretrained_models/checkpoint/: and :/yourfolder/data/pretrained_models/config/ respectively. <br>
+After downloading the "v1-inference.yaml" file, change the value of "max_length" to 15 in line 72.
 
 
 ### <p> Feature extraction </p>
@@ -54,6 +55,7 @@ You need to download the checkpoint file :sd-v1-4.ckpt and the config file :v1-i
     python Feature extractor/detail_extracttion.py
     python Feature extractor/Structural_feature_extraction.py
     python Feature extractor/Structural_feature_selection.py
+
 
 ### <p> Feature decoding </p>
     cd your_folder
