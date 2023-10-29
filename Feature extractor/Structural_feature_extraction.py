@@ -78,8 +78,8 @@ def z_score_all_features(feature_maps):
 def main():
     parser = argparse.ArgumentParser(description='Structural_feature_extraction')
     parser.add_argument('--target_layers', help='CLIP_layers', default=['Linear-2', 'Linear-4', 'Linear-6', 'Linear-8', 'Linear-10', 'Linear-12','VisionTransformer-1'], type=list)
-    parser.add_argument('--stim_sub1_trn', help='stim_trn_saved path', default='', type=str)        #(8859,3,256,256)
-    parser.add_argument('--stim_sub1_val_multi', help='stim_val_saved path', default='', type=str)  #(982,3,256,256)
+    parser.add_argument('--stim_sub1_trn', help='stim_trn_saved path', default='/your_folder/data/stimuli_data/trn_images_sub1.npy', type=str)        #(8859,3,256,256)
+    parser.add_argument('--stim_sub1_val_multi', help='stim_val_saved path', default='/your_folder/data/stimuli_data/val_images.npy', type=str)  #(982,3,256,256)
     parser.add_argument('--feature_sub1_trn', help='feature_trn_saved root', default='', type=str)
     parser.add_argument('--feature_sub1_val_multi', help='feature_val_saved root', default='', type=str)
     args = parser.parse_args()
