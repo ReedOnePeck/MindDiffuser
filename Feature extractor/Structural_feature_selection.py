@@ -84,7 +84,7 @@ def feature_select(index_save_path, CLIP_feature_saved_path, x_trn, k_folder=5, 
 
 def main():
     parser = argparse.ArgumentParser(description='CLIP text feature extraction')
-    parser.add_argument('--trn_fMRI_file_ex',  default='', type=str)
+    parser.add_argument('--trn_fMRI_file_ex',  default='/your_folder/data/response_data/', type=str)
     parser.add_argument('--index_save_path',  default='', type=str)
     parser.add_argument('--CLIP_feature_saved_path',  default='', type=str)
     parser.add_argument('--Layers',  default=['Linear-2', 'Linear-4', 'Linear-6', 'Linear-8', 'Linear-10', 'Linear-12'], type=list)
