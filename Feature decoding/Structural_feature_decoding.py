@@ -59,11 +59,11 @@ def decoding_layer(trn_CLIP_feature_path, val_CLIP_feature_path, mask_path, laye
 
     if layer_name != 'VisionTransformer-1':
         mask = np.load(mask_path + '/{}/Folder_5_{}.npy'.format(layer_name,remain_rate))
-        y_trn = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)[:,mask]
-        y_val = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[:500, mask]
+        y_trn = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)[:8000,mask]
+        y_val = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[8000:, mask]
     else:
-        y_trn = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)
-        y_val = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[:500, :]
+        y_trn = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)[:8000,:]
+        y_val = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[8000:, :]
     print('数据加载完毕')
 
 
