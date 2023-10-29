@@ -90,7 +90,8 @@ After configuring the environment and codes provided by Ozcelik, run the followi
     python Reproduce Ozcelik's results/reconstruct_images.py
 
 ## <p> Cite </p>
-Please cite our paper if you use this code in your own work:
+Please cite our paper if you use this code in your own work:<br>
+
     @inproceedings{10.1145/3581783.3613832,
     author = {Lu, Yizhuo and Du, Changde and Zhou, Qiongyi and Wang, Dianpeng and He, Huiguang},
     title = {MindDiffuser: Controlled Image Reconstruction from Human Brain Activity with Semantic and Structural Diffusion},
