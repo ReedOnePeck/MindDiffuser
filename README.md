@@ -9,13 +9,13 @@ This is the official code for the paper "MindDiffuser: Controlled Image Reconstr
 # <p align="center">  Algorithm diagram of MindDiffuser  </p> 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/A.png)<br>
 
-
+# <p align="center">  A brief comparison of image reconstruction results </p> 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/plane_00.png)<br>
 
-A brief comparison of image reconstruction results.
+# <p align="center"> Reconstruction results of MindDiffuser on multiple subjects </p>
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/four_sub_00.png)<br>
 
-Reconstruction results of MindDiffuser on multiple subjects
+# <p align="center"> Interpretability analysis </p>
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/cortex_sub2_00.png)<br>
 
 During the feature decoding process, we use L2-regularized linear regression model to automatically select voxels to fit three types
