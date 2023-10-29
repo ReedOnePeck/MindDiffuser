@@ -15,6 +15,9 @@ This is the official code for the paper "MindDiffuser: Controlled Image Reconstr
 ## <p align="center"> Reconstruction results of MindDiffuser on multiple subjects </p>
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/four_sub_00.png)<br>
 
+## <p align="center">  Experiments  </p> 
+![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/1686488621334.png)<br>
+
 ## <p align="center"> Interpretability analysis </p>
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/cortex_sub2_00.png)<br>
 
@@ -22,7 +25,12 @@ During the feature decoding process, we use L2-regularized linear regression mod
 of feature: semantic feature 𝑐, detail feature 𝑧, and structural feature 𝑍𝐶𝐿𝐼𝑃. We ultilize pycortex to project the weights of each 
 voxel in the fitted model onto the corresponding 3D coordinates in the visual cortex.
 
-## <p align="center">  Preliminaries  </p> 
+
+
+
+# <p> Steps to reproduce MindDiffuser </p>
+
+## <p>  Preliminaries  </p> 
 This code was developed and tested with:
 
 *  Python version 3.8.5
@@ -30,18 +38,14 @@ This code was developed and tested with:
 *  A100 40G
 *  The conda environment defined in environment_1.yml
 
-## <p align="center">  Dataset  </p> 
+## <p>  Dataset downloading and preparation </p> 
 `NSD dataset` http://naturalscenesdataset.org/  <br>
 `Data preparation` https://github.com/styvesg/nsd  <br>
 - After preprocessing the NSD data, please organize the image stimuli in the training set into a .npy file with dimensions (8859, 3, 512, 512), and the image stimuli in the test set  into a .npy file with dimensions (982, 3, 512, 512), stored in ：your_folder/data/stimuli_data/. And store the fMRI data in ：your_folder/data/response_data/. 
 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/NSD.png)
 
-## <p align="center">  Experiments  </p> 
-![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/1686488621334.png)
-
-## <p> MindDiffuser </p>
-### <p> Model preparation  </p>
+## <p> Model downloading and preparation  </p>
 First, set up the conda enviroment as follows:<br>
 
     conda env create -f environment_1.yml  # create conda env
@@ -51,7 +55,7 @@ First, set up the conda enviroment as follows:<br>
 - After downloading the "v1-inference.yaml" file, change the value of "max_length" to 15 in line 72.
 
 
-### <p> Feature extraction </p>
+## <p> Feature extraction </p>
     cd your_folder
     python Feature extractor/Semantic_feature_extraction.py
     python Feature extractor/detail_extracttion.py
@@ -59,13 +63,13 @@ First, set up the conda enviroment as follows:<br>
     python Feature extractor/Structural_feature_selection.py
 
 
-### <p> Feature decoding </p>
+## <p> Feature decoding </p>
     cd your_folder
     python Feature decoding/Semantic_feature_decoding.py
     python Feature decoding/Structural_feature_decoding.py
     python Feature decoding/detail_decoding.py
     
-### <p> Image reconstruction </p>
+## <p> Image reconstruction </p>
 
     cd your_folder
     python Image reconstruction/Reconstruction.py
