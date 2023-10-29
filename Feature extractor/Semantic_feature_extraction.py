@@ -40,9 +40,9 @@ def load_model_from_config(config, ckpt, verbose=False):
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
 def get_text_features(coco_ids_path , stimuli_data_path , feature_saved_path):
-    dataDir = '/nfs/diskstation/DataStation/public_dataset/MSCOCO/annotations_trainval2017'
-    annFile_trn = '{}/annotations/captions_{}.json'.format(dataDir, 'train2017')
-    annFile_val = '{}/annotations/captions_{}.json'.format(dataDir, 'val2017')
+    dataDir = '/your_folder/data/utils_data/'
+    annFile_trn = '{}/captions_{}.json'.format(dataDir, 'train2017')
+    annFile_val = '{}/captions_{}.json'.format(dataDir, 'val2017')
     coco_caps_trn = COCO(annFile_trn)
     coco_caps_val = COCO(annFile_val)
     coco_ids = np.load(coco_ids_path)
@@ -77,10 +77,10 @@ def get_text_features(coco_ids_path , stimuli_data_path , feature_saved_path):
 
 def main():
     parser = argparse.ArgumentParser(description='CLIP text feature extraction')
-    parser.add_argument('--stable_diffusion_config_path',  default='', type=str)
-    parser.add_argument('--stable_diffusion_skpt_path',  default='', type=str)
-    parser.add_argument('--coco_ids_path',  default='', type=str)
-    parser.add_argument('--stimuli_data_path',  default='', type=str)
+    parser.add_argument('--stable_diffusion_config_path',  default='/your_folder/data/pretrained_models/v1-inference.yaml', type=str)
+    parser.add_argument('--stable_diffusion_skpt_path',  default='/your_folder/data/pretrained_models/sd-v1-4.ckpt', type=str)
+    parser.add_argument('--coco_ids_path',  default='/your_folder/data/utils_data/trn_cocoID_correct.npy', type=str)
+    parser.add_argument('--stimuli_data_path',  default='/your_folder/data/stimuli_data/trn_images.npy', type=str)
     parser.add_argument('--feature_saved_path',  default='', type=str)
     args = parser.parse_args()
     
