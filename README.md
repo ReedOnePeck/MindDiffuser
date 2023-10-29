@@ -88,6 +88,26 @@ After configuring the environment and codes provided by Ozcelik, run the followi
     python Reproduce Ozcelik's results/extract_features.py
     python Reproduce Ozcelik's results/train_regression.py
     python Reproduce Ozcelik's results/reconstruct_images.py
+
+## <p> Cite </p>
+Please cite our paper if you use this code in your own work:
+    @inproceedings{10.1145/3581783.3613832,
+author = {Lu, Yizhuo and Du, Changde and Zhou, Qiongyi and Wang, Dianpeng and He, Huiguang},
+title = {MindDiffuser: Controlled Image Reconstruction from Human Brain Activity with Semantic and Structural Diffusion},
+year = {2023},
+isbn = {9798400701085},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3581783.3613832},
+doi = {10.1145/3581783.3613832},
+abstract = {Reconstructing visual stimuli from brain recordings has been a meaningful and challenging task. Especially, the achievement of precise and controllable image reconstruction bears great significance in propelling the progress and utilization of brain-computer interfaces. Despite the advancements in complex image reconstruction techniques, the challenge persists in achieving a cohesive alignment of both semantic (concepts and objects) and structure (position, orientation, and size) with the image stimuli. To address the aforementioned issue, we propose a two-stage image reconstruction model called MindDiffuser1. In Stage 1, the VQ-VAE latent representations and the CLIP text embeddings decoded from fMRI are put into Stable Diffusion, which yields a preliminary image that contains semantic information. In Stage 2, we utilize the CLIP visual feature decoded from fMRI as supervisory information, and continually adjust the two feature vectors decoded in Stage 1 through backpropagation to align the structural information. The results of both qualitative and quantitative analyses demonstrate that our model has surpassed the current state-of-the-art models on Natural Scenes Dataset (NSD). The subsequent experimental findings corroborate the neurobiological plausibility of the model, as evidenced by the interpretability of the multimodal feature employed, which align with the corresponding brain responses.},
+booktitle = {Proceedings of the 31st ACM International Conference on Multimedia},
+pages = {5899–5908},
+numpages = {10},
+keywords = {fmri, brain-computer interface (bci), probabilistic diffusion model, controlled image reconstruction},
+location = {Ottawa ON, Canada},
+series = {MM '23}
+}
     
 
 
