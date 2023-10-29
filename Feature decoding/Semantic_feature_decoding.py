@@ -126,12 +126,12 @@ def main():
     all_data = np.array(torch.tensor(text).squeeze(1))[:, 1:, :]  # (8859,14,768)
     y = _reshape(all_data)
     y_z_score = scaler.fit_transform(y)
-    y_trn = y_z_score[:, :]
+    y_trn = y_z_score[:8000, :]
     y_val = y_z_score[8000:, :]
 
     x = fetch_ROI_voxel(args.trn_file_ex, ROIs)  # (8859,11694)
     x = scaler.fit_transform(x)
-    x_trn = x[:, :]
+    x_trn = x[:8000, :]
     x_val = x[8000:, :]
 
     train = training_decode_LDM_text_feature(x_trn, y_trn, x_val, y_val, mean, s, args.model_save_path, 450 , True)
