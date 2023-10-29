@@ -41,7 +41,9 @@ This code was developed and tested with:
 ## <p>  Dataset downloading and preparation </p> 
 `NSD dataset` http://naturalscenesdataset.org/  <br>
 `Data preparation` https://github.com/styvesg/nsd  <br>
-- After preprocessing the NSD data, please organize the image stimuli in the training set into a .npy file with dimensions (8859, 3, 512, 512), and the image stimuli in the test set  into a .npy file with dimensions (982, 3, 512, 512), stored in ：your_folder/data/stimuli_data/. And store the fMRI data in ：your_folder/data/response_data/. 
+- After preprocessing the NSD data, please organize the image stimuli in the training set into a .npy file with dimensions (8859, 3, 512, 512), and the image stimuli in the test set  into a .npy file with dimensions (982, 3, 512, 512), stored in ：your_folder/data/stimuli_data/. And store the fMRI data in ：your_folder/data/response_data/.
+- Download "captions_train2017.json" and "captions_test2017.json" from the official website of the COCO dataset(https://cocodataset.org/#download). Save them in the path "your_folder/data/utils_data/".
+- Run the code(https://github.com/styvesg/nsd/blob/master/data_preparation.ipynb) to obtain the textual descriptions of the stimulus images from NSD in the COCO dataset.Rename the corresponding file as "trn_cocoID_correct.npy" or "test_cocoID_correct.npy" and save it in the path "your_folder/data/utils_data/".
 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/NSD.png)
 
