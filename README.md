@@ -36,7 +36,7 @@ This code was developed and tested with:
 *  Python version 3.8.5
 *  PyTorch version 1.11.0
 *  A100 40G
-*  The conda environment defined in environment_1.yml
+*  The conda environment defined in environment_1.yaml
 
 ## <p>  Dataset downloading and preparation </p> 
 `NSD dataset` http://naturalscenesdataset.org/  <br>
