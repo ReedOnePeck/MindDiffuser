@@ -41,29 +41,31 @@ def cal_pccs(X, Y):
 	r = np.sum(ZX*ZY)/(len(X))
 	return(r)
 	
-def decoding_layer(trn_CLIP_feature_path, val_CLIP_feature_path, mask_path, layer_name, remain_rate, decoding_function, n, model_save_path ):
+def decoding_layer(trn_CLIP_feature_path,  mask_path, layer_name, remain_rate, decoding_function, n, model_save_path ):
     model_save_path = model_save_path + '{}_{}/'.format(layer_name, remain_rate)
     if not os.path.exists(model_save_path):
         os.makedirs(model_save_path)
 
-    x_trn = fetch_ROI_voxel(trn_file_ex, ROIs)  # (8859,11694)
+    #x
+    x_trn = fetch_ROI_voxel(trn_file_ex, ROIs)[:8000, :]      # (,11694)
     x_mean = np.mean(x_trn, axis=0)
     x_std = np.std(x_trn, axis=0)
-
     x_trn = (x_trn - x_mean) / x_std
-    trn_CLIP_feature_all_layer = fetch_CLIP_feature(trn_CLIP_feature_path + '/trn_stim_CLIP_zscore.npy')
 
-    x_val = fetch_ROI_voxel(val_file_ex, ROIs)[:500, :]
+    x_val = fetch_ROI_voxel(trn_file_ex, ROIs)[8000:, :]
     x_val = (x_val - x_mean) / x_std
-    val_CLIP_feature_all_layer = fetch_CLIP_feature(val_CLIP_feature_path + '/val_stim_CLIP_zscore.npy')
+
+
+    #y
+    trn_CLIP_feature_all_layer = fetch_CLIP_feature(trn_CLIP_feature_path + '/trn_stim_CLIP_zscore.npy')
 
     if layer_name != 'VisionTransformer-1':
         mask = np.load(mask_path + '/{}/Folder_5_{}.npy'.format(layer_name,remain_rate))
         y_trn = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)[:8000,mask]
-        y_val = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[8000:, mask]
+        y_val = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)[8000:, mask]
     else:
         y_trn = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)[:8000,:]
-        y_val = CLIP_feature_layer(val_CLIP_feature_all_layer, layer_name)[8000:, :]
+        y_val = CLIP_feature_layer(trn_CLIP_feature_all_layer, layer_name)[8000:, :]
     print('数据加载完毕')
 
 
@@ -143,7 +145,7 @@ def main():
         os.makedirs(args.model_save_path)
 
     for layer in args.Layers:
-	    b = decoding_layer(trn_CLIP_feature_path=args.trn_CLIP_feature_path, val_CLIP_feature_path=args.val_CLIP_feature_path, mask_path = args.mask_path, 
+	    b = decoding_layer(trn_CLIP_feature_path=args.trn_CLIP_feature_path, mask_path = args.mask_path, 
 			       layer_name=layer, remain_rate=25, decoding_function='fastl2', n=850, model_save_path=args.model_save_path )
 
 if __name__ == "__main__":
