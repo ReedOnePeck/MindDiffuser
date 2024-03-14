@@ -31,7 +31,10 @@ voxel in the fitted model onto the corresponding 3D coordinates in the visual co
 # <p> Steps to reproduce MindDiffuser </p>
 
 If you are pressed for time or unable to reproduce my work, you can also directly extract the reconstruction results of MindDiffuser on subjects 1, 2, 5, and 7 from Baidu Netdisk for comparison.
+
 [百度网盘](https://pan.baidu.com/s/1TtmXEd-fOidlMOzuOtphxg?pwd=izxl)  提取码：izxl 
+
+![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/Pan.png)
 
 
 
