@@ -33,6 +33,8 @@ Please scan the QR code below to obtain the pre-processed experimental data.
 
 [百度网盘](https://pan.baidu.com/s/1iWoK1xuev9kdsftLzDvZBw?pwd=qlkx)  提取码：qlkx 
 
+![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/nsd.png)
+
 
 
 If you are pressed for time or unable to reproduce my work, you can also directly extract the reconstruction results of MindDiffuser on subjects 1, 2, 5, and 7 from Baidu Netdisk for comparison.
