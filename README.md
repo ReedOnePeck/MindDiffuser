@@ -29,6 +29,11 @@ voxel in the fitted model onto the corresponding 3D coordinates in the visual co
 
 
 # <p> Steps to reproduce MindDiffuser </p>
+Please scan the QR code below to obtain the pre-processed experimental data.
+
+[百度网盘](https://pan.baidu.com/s/1iWoK1xuev9kdsftLzDvZBw?pwd=qlkx)  提取码：qlkx 
+
+
 
 If you are pressed for time or unable to reproduce my work, you can also directly extract the reconstruction results of MindDiffuser on subjects 1, 2, 5, and 7 from Baidu Netdisk for comparison.
 
