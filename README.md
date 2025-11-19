@@ -33,7 +33,7 @@ Please scan the QR code below to obtain the pre-processed experimental data.
 
 [百度网盘](https://pan.baidu.com/s/1FrTBGwSbPqCRw8d8zuPGog?pwd=qr5u)  提取码：qr5u 
 
-![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/nsd.png)
+![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/nsd.jpg)
 
 
 
@@ -41,7 +41,7 @@ If you are pressed for time or unable to reproduce my work, you can also directl
 
 [百度网盘](https://pan.baidu.com/s/1B076gNang-Y-j4GJe_Ozlg?pwd=vnx8)  提取码：vnx8
 
-![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/Pan.png)
+![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/Pan.jpg)
 
 
 
