@@ -31,7 +31,7 @@ voxel in the fitted model onto the corresponding 3D coordinates in the visual co
 # <p> Steps to reproduce MindDiffuser </p>
 Please scan the QR code below to obtain the pre-processed experimental data.
 
-[百度网盘](https://pan.baidu.com/s/1iWoK1xuev9kdsftLzDvZBw?pwd=qlkx)  提取码：qlkx 
+[百度网盘](https://pan.baidu.com/s/1FrTBGwSbPqCRw8d8zuPGog?pwd=qr5u)  提取码：qr5u 
 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/nsd.png)
 
@@ -39,7 +39,7 @@ Please scan the QR code below to obtain the pre-processed experimental data.
 
 If you are pressed for time or unable to reproduce my work, you can also directly extract the reconstruction results of MindDiffuser on subjects 1, 2, 5, and 7 from Baidu Netdisk for comparison.
 
-[百度网盘](https://pan.baidu.com/s/1TtmXEd-fOidlMOzuOtphxg?pwd=izxl)  提取码：izxl 
+[百度网盘](https://pan.baidu.com/s/1B076gNang-Y-j4GJe_Ozlg?pwd=vnx8)  提取码：vnx8
 
 ![](https://github.com/ReedOnePeck/MindDiffuser/blob/main/Images/Pan.png)
 
